@@ -1,0 +1,126 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="google-signin-client_id" content="528129544623-ietluu4kkkgbiaed1cqt9d29214f682r.apps.googleusercontent.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    <script>
+    function start() {
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+        client_id: '528129544623-ietluu4kkkgbiaed1cqt9d29214f682r.apps.googleusercontent.com'
+
+      });
+    });
+  }
+</script>
+    <style type="text/css">
+    body{
+      font-family: 'DrawnBody', Arial, Helvetica, sans-serif;
+    }
+    .text-center{
+      font-size: 100px;
+    }
+    .text-area{
+      font-size: 100px;
+    }
+    .h:hover{
+      color: rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .u:hover{
+      color: rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .n:hover{
+      color: rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .g:hover{
+      color: rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    .r:hover{
+      color: rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .y:hover{
+      color: rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    .exc:hover{
+      color: rgba(0,0,0,0.4);
+      cursor: pointer;
+    }
+    </style>
+</head>
+
+<body>
+
+<div id="signinButton" class="text-center">
+  <p class="text-area">
+    <span class="h">P</span>
+    <span class="u">O</span>
+    <span class="n">S</span>
+    <span class="g">T</span>
+    <span class="exc">S</span>
+  </p>
+  <div id="mb" class="g-signin2"
+    data-scope="profile email"
+    data-clientid="528129544623-ietluu4kkkgbiaed1cqt9d29214f682r.apps.googleusercontent.com"
+    data-redirecturi="postmessage"
+    data-accesstype="offline"
+    data-cookiepolicy="single_host_origin"
+    data-callback="signInCallback"
+    data-approvalprompt="force">
+  </div>
+</div>
+
+  <div id="result"></div>
+
+
+<script>
+  $('#signinButton').click(function() {
+    function signInCallback(authResult){
+      if (authResult['code']){
+        $('#signinButton').attr('style', 'display: none');
+        $.ajax({
+          type: 'POST',
+          url: '/gconnect?state={{STATE}}',
+          headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+          },
+          contentType: 'application/octet-stream; charset=utf-8',
+          success:function(result){
+            $('#result').html('  Login Successful!!  '+ result + '')
+                 setTimeout(function() {
+                  window.location.href = "/posts";
+                 }, 2000);
+          },
+          processData:false,
+          data:authResult['code']
+        });
+      } else{
+        // handle error
+        console.log('There was an error: ' + authResult['error']);
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+      }
+    }
+    auth2.grantOfflineAccess().then(signInCallback);
+  });
+</script>
+
+</body> 
+</html>
+
+
+

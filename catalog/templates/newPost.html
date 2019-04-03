@@ -1,0 +1,85 @@
+
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	button,button{
+  		color: #4682B4;
+  	}
+  	a,a:hover{
+  		text-decoration: none;
+  	}
+  	h1{
+  		margin-bottom: 20px;
+  	}
+  	.form-group{
+  		font-size: 15px;
+  	}
+  	.sbtn{
+      float: right;
+  		font-size: 20px;
+  		color: #4682B4;
+  		padding: 15px;
+  		width: 150px;
+  		margin-right: 10px;
+  		font-weight: bold;
+  	}
+  	.cbtn{
+  	  font-size: 20px;
+      float: right;
+  		color: #4682B4;
+  		padding: 15px;
+  		width: 150px;
+  		margin-left: 40px;
+  		font-weight: bold;
+  	}
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+	<h1> Add New Post </h1>
+	<form  action="{{url_for('newPosts')}}" method = 'POST'>
+		<div class="form-group">
+			<label for="name">Name:</label>
+			<input style="margin-left: 130px; padding: 5px;" type='text' size='20' name='name' placeholder="post_name">
+    </div>
+    <label for="description">Description:</label>
+    <div class="form-group">
+      <textarea style="margin-left: 180px; margin-top: -20px; width: 80%; height: 40%; margin-right: 20px;" type="text-area" name="description" rows="5" cols="20" placeholder="Write here">
+      </textarea>
+    </div>
+    <div class="form-group" >
+      <label for="name">Type:</label>
+        <input style="margin-left: 137px;" type="radio" name="post_type" value="None" checked> None<br>
+        <input style="margin-left: 180px;" type="radio" name="post_type" value="Technical"> Technical <br>
+        <input style="margin-left: 180px;" type="radio" name="post_type" value="Entertainment"> Entertainment <br>
+        <input style="margin-left: 180px;" type="radio" name="post_type" value="Sports"> Sports <br>
+        <input style="margin-left: 180px;" type="radio" name="post_type" value="Popular">Popular<br>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="image">Image:</label>
+        <input style="margin-left: 135px; margin-top: 10px; width: 70%; height:20%; margin-right: 25px;" type="text-area" name="image" rows="2" cols="30">
+      </div>
+    </div>
+    <div>
+      <div class="form-group">
+        <label for="ratings">Ratings:</label>
+        <input style="margin-left: 127px; margin-top: 10px; width: 30%; height:20%; margin-right: 25px;" type="text-area" name="ratings" rows="1" cols="15">
+      </div>
+    </div>
+		<button class="btn sbtn" type='submit' value='Create'>Create</button>
+		<button class="btn cbtn"><a href="{{url_for('showPosts') }}">Cancel</a></button>
+	</form>
+</div>
+
+</body>
+</html>
+
+

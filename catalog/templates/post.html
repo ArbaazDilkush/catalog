@@ -1,0 +1,129 @@
+
+
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+  	.home{
+		font-size: 25px;
+		padding: 10px;
+	}
+	.cimg{
+  		float: right;
+  		margin-top: 5px;
+  		width: 50px;
+  		height: 50px;
+  		margin-right: 10px;
+  		border: 2px solid black;
+  		border-radius: 15px;
+  		padding: 5px;
+  	}
+	.header-top{
+		width: 100%;
+		height: 20px;
+		background-color: rgba(0,0,0,0.7);
+	}
+	header{
+		text-overflow: none;
+		height: auto;
+		padding-top: 10px;
+		padding-bottom: 20px;
+		padding-left: 20px;
+		background-color: rgba(0,0,0,0.2);
+	}
+	.msg{
+		width: auto;
+		background-color: #7CFC00;
+		font-size: 20px;
+		height: auto;
+	}
+  	.title{
+  		font-size: 60px;
+  		padding-bottom: 10px;
+  	}
+  	.uname{
+  		font-size: 20px;
+  		padding-right: 20px;
+  	}
+  	.dname{
+  		font-size: 20px;
+  	}
+  	.cnew{
+		font-size: 25px;
+		margin: 10px;
+	}
+	.container{
+		margin-bottom: 40px;
+	}
+	a,a:hover,a:active,a:visited{
+		text-decoration: none;
+	}
+   </style>
+
+   <script>
+		$(document).ready(function(){
+ 		 $('[data-toggle="tooltip"]').tooltip(); 
+		});
+	</script>
+
+</head>
+
+
+<body>
+
+
+<button class="btn home">
+	<a href="{{url_for('showPosts') }}">Back to Menu</a>
+</button>
+
+
+
+<div class="header-top"></div>
+<header>
+{% if 'username' in session %}
+	<h1 class="title">{{fullpost.name}}</h1>
+	<span class="iprice">{{fullpost.rating}}</span>
+	{% if user_id==fullpost.user_id %}
+	<a style="font-size: 25px" href= "{{url_for('editPosts', post_id = fullpost.id) }}">Edit</a>
+		<span style="font-size: 30px"> | </span>
+	<a style="font-size: 25px" href = "{{url_for('deletePosts', post_id = fullpost.id ) }}">Delete</a>
+	{% endif %}
+{% endif %}
+</header>
+
+<p class="text-center msg">
+	{% with messages = get_flashed_messages() %}
+  	 	{% if messages %}
+      		{% for message in messages %}
+         		{{ message }}
+      		{% endfor %}
+   		{% endif %}
+	{% endwith %}
+</p>
+
+<br>
+<br>
+
+
+
+<div class="container">
+	{% if 'username' in session %}
+	<img src="{{fullpost.image}}" style="margin-left:20px; border-radius: 50px;" height="150px" width="200px">
+	<div class="row">
+			<div class="col-lg-8" style="margin-left: 150px; font-size: 25px;">
+  					<span class="idescription" style="padding-top: 50px">{{fullpost.description}}</span>
+			</div>
+	</div>
+	{% endif %}
+</div>
+
+
+
+
+</body>
+
+</html>
